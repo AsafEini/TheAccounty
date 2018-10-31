@@ -3,6 +3,31 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+
+const initialState = {
+    wisdomSentence: 'In the beginning God created the heaven and the earth'
+};
+
+function reducer(state = initialState, action) {
+    switch (action.type){
+        case "SMART":
+        return {
+            wisdomSentence: state.wisdomSentence + "-SMART"
+        };
+        default:
+        return state;
+    }
+}
+
+const store = createStore(reducer);
+store.dispatch({ type: "SMART"});
+const App = () => (
+    <Provider store={store}>
+    <App/>
+    </Provider>
+)
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
